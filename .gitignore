@@ -1,0 +1,3 @@
+res/*
+problem_domain/database.py
+*__pycache__
