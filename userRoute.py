@@ -1,3 +1,4 @@
+from ast import Not
 from datetime import datetime, timedelta
 from fastapi import APIRouter, Body, Request, Response, HTTPException, status, Depends
 from fastapi.encoders import jsonable_encoder
@@ -210,7 +211,8 @@ async def update_user(request: Request, user: UserUpdate = Body(...), current_us
         Basic_User: Basic user details returned
     """
     user = {key: val for key, val in user.dict().items() if val is not None} #check all key value pairs, return only matched 
-    if user['password']: #if user requests to change their password
+    #if user requests to change their password
+    if user.get('password') is not None: 
         user['password'] = hashPassword(user['password']) #hash
     if(len(user)) >= 1: #as long as user has more than one key value pairs
         output = request.app.database[config['DB_TABLE']].update_one( #send update to db
