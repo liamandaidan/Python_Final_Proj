@@ -8,6 +8,10 @@ config = dotenv_values(".env")
 
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    return {"message": "To begin navigate to /docs"}
+
 @app.on_event("startup")
 def startup_db_client():
     app.mongodb_client = MongoClient(config["ATLAS_URI"])
