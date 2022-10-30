@@ -2,6 +2,8 @@
 ## Introduction  
 The purpose of my project is to illustrate restful api services around user accounts. This will cover some of the basic functions, along with admin functions.
 In this project I used mongoDB for the database functions, feel free to connect using all the information within the .env file. 
+## Github link to repo
+https://github.com/liamandaidan/Python_Final_Proj
 ## Quick demo  
 For a video demonstration and quick run through of functionality:   
 https://youtu.be/DoxDfyTxra4   
