@@ -35,13 +35,18 @@ async def root():
 
 @app.on_event("startup")
 def startup_db_client():
+    """On load connect to db
+    """
     app.mongodb_client = MongoClient(config["ATLAS_URI"])
     app.database = app.mongodb_client[config["DB_NAME"]]
     print("Connected to the MongoDB database!")
 
 @app.on_event("shutdown")
 def shutdown_db_client():
+    """On db close shutdown connection
+    """
     app.mongodb_client.close()
-    
+
+#Route config + swagger tags
 app.include_router(user_router, tags=["users"], prefix="/user")
 app.include_router(cool, tags=["token"], prefix="/token")

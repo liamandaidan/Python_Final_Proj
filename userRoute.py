@@ -19,9 +19,9 @@ router = APIRouter()
 #hashing, passwords and etc
 passwordContext = CryptContext(schemes=["bcrypt"], deprecated="auto")
 bearerScheme = OAuth2PasswordBearer(tokenUrl="token")
-
+#hard coded roles
 USER_ROLES = {'A': "Admin",'U': "User", 'D': 'Disabled'}
-
+#Admin, user, disabled(for if an admin decided to disable account at some point.)
 def verifiyPassword(txt_pass: str, hashed_password: str)->bool:
     """Verifiy the integrety of the the password passed in.
 

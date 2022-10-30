@@ -3,6 +3,11 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 class User(BaseModel):
+    """User model along with all enforced fields
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
     first_name: str = Field(...)
     last_name: str = Field(...)
@@ -10,10 +15,11 @@ class User(BaseModel):
     password: str = Field(...)
     role: Optional[str]
     class Config:
+        """Swagger config examples
+        """
         allow_population_by_field_name = True
         schema_extra = {
             "example": {
-                #"_id": "066de609-b04a-4b30-b46c-32537c7f1f6e",
                 "first_name": "Liam",
                 "last_name": "McLaughlin",
                 "username": "lm9",
@@ -21,12 +27,19 @@ class User(BaseModel):
             }
         }
 class Basic_User(BaseModel):
+    """Basic user model used with enforcement of fields not considered "valuable information"
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     first_name: str = Field(...)
     last_name: str = Field(...)
     username: str = Field(...)
     role: str = Field(...)
     class Config:
-            schema_extra = {
+        """Swagger config examples
+        """
+        schema_extra = {
             "example": {
                 "first_name": "Liam",
                 "last_name": "McLaughlin",
@@ -34,10 +47,17 @@ class Basic_User(BaseModel):
             }
         }    
 class UserAuth(BaseModel):
+    """User login data enforcement
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     username: str = Field(...)
     password: str = Field(...)
     
     class Config:
+        """Swagger docs
+        """
         schema_extra = {
             "example": {
                 "username": "lm9",
@@ -46,6 +66,11 @@ class UserAuth(BaseModel):
         }        
 
 class Token(BaseModel):
+    """Access token used to enforce validation
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     access_token: str
     token_type: str
     
@@ -58,15 +83,27 @@ class Token(BaseModel):
         }
 
 class TokenData(BaseModel):
+    """Used to enforce only username from token sub
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     username: str | None = None
     
 class UserUpdate(BaseModel):
+    """User can edit their own account changing the following fields
+
+    Args:
+        BaseModel (_type_): https://pydantic-docs.helpmanual.io/usage/models/
+    """
     first_name: Optional[str]
     last_name: Optional[str]
     username: Optional[str]
     password: Optional[str]
     
     class Config:
+        """Swagger docs
+        """
         schema_extra = {
             "example": {
                 "first_name": "Liam",
